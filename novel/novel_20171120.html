@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Novel</title>
+	<style>
+		#novelwindow{
+			border: 1px solid gray;
+			width: 800px;
+			height: 600px;
+			
+			background-image: url(image/earth.jpg);
+			background-size: 800px 600px;
+		}
+		#message{
+			position: absolute;
+			top: 350px;
+			left: 75px;
+			
+			border: 1px solid blue;
+			width: 650px;
+			height: 200px;
+			
+			font-size: 22pt;
+			padding: 5px;
+			
+			background-color: rgba(255,255,255,0.7);
+		}
+		
+		#char1{
+			height: 600px;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="novelwindow">
+		<img id="char1" src="image/f127.png">
+		<div id="message">
+			あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお 
+		</div>
+	</div>
+
+	<script>
+		//シナリオ定義
+		var scenario = [
+			  ["TXT",  "我輩は猫である"]
+			, ["TXT",  "名前はまだない"]
+			, ["CHAR", "image/f363.png"]
+		];
+
+		var msg   = document.querySelector("#message");
+		var char1 = document.querySelector("#char1");
+		var i     = 0;
+		msg.addEventListener("click", function(){
+			var command = scenario[i][0];
+			var value   = scenario[i][1];
+			
+			switch(command){
+				case "TXT":
+					msg.innerHTML = value;
+					break;
+				case "CHAR":
+					char1.setAttribute("src", value);
+					break;
+			}
+		
+			i++;
+		});
+	</script>
+</body>
+</html>
