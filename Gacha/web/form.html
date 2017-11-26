@@ -3,11 +3,29 @@
 <head>
 	<meta charset="utf8">
 	<title>Gacha</title>
+	<style>
+		#loop{
+			width: 200px;
+			font-size: 10pt;
+		}
+		#loop:placeholder-shown{
+			color: #e0e0e0;
+		}
+	</style>
 </head>
 <body>
+	<h1>ガチャ</h1>
+
 	<form action="draw.php" method="GET">
-		<input type="text" name="loop" placeholder="1">
-		<button>ガチャを引く</button>
+		<input type="text" id="loop" name="loop" placeholder="(ガチャ回数を数字で入力)">
+		<button type="submit">ガチャを引く</button>
 	</form>
+
+	<script>
+		window.addEventListener("load", function(e){
+			var loop = document.querySelector("#loop");
+			loop.focus();
+		});
+	</script>
 </body>
 </html>
