@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Hello Ajax</title>
+	<style type="text/css">
+		#canvas{
+			border: 1px solid gray;
+			width: 300px;
+			height: 250px;
+		}
+	</style>
+</head>
+<body>
+
+<!-- 通信結果をここに表示 -->
+<div id="canvas"></div>
+
+<form>
+	<input type="text" id="kaisuu">
+	<button type="button" id="getHello">ガチャをひく</button>
+</form>
+
+<script>
+var canvas = document.querySelector("#canvas");
+var hello  = document.querySelector("#getHello");
+hello.addEventListener("click", function(){
+	var kaisuu  = document.querySelector("#kaisuu").value;
+	
+	var request = new XMLHttpRequest();
+	request.open('GET', 'http://localhost/gacha.php?kaisuu='+kaisuu, false);
+	request.onload = function() {
+		if (request.status === 200) {
+			var response = request.responseText;
+			var json     = JSON.parse(response);
+			
+			var str="";
+			for(var i=0; i<json.length; i++){
+				 str += '<img src="image/'+json[i]["id"]+'.png" width="100">';
+			}
+			canvas.innerHTML = str;
+		}
+	};
+	request.onerror = function() {
+		//エラー時の処理
+		canvas.innerHTML = "Error!";
+	};
+	//送信
+	request.send();		//POSTの場合は引数に文字列を渡す
+});
+</script>
+</body>
+</html>
